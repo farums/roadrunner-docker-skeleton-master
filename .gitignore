@@ -6,5 +6,5 @@ nbproject
 .project
 .settings
 composer.lock
-vendor/
+app/vendor/
 .env
