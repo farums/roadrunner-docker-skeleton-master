@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  roadrunner:
+    build:
+      context: ./containers/roadrunner
+      args:
+        RR_VERSION: ${RR_VERSION}
+        PHP_IMAGE_VERSION: ${PHP_IMAGE_VERSION}
+    ports:
+      - 8080:8080
+    environment:
+      RR_VERSION: ${RR_VERSION}
+    volumes:
+      - ./app:/app
+      - ./containers/roadrunner/config/.rr.yaml:/etc/rr.yaml:ro
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:8080"]
+        interval: 5s
+        timeout: 1s
+        retries: 5
